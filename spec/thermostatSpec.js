@@ -24,7 +24,7 @@ describe('Thermostat', function() {
     })
 
     it('has a minimum of 10 degrees', function() {
-      for (var i = 0; i < 10; i++) {
+      for (var i = 0; i < 11; i++) {
         thermostat.down();
       }
       expect(thermostat.getCurrentTemperature()).toEqual(10);
@@ -55,12 +55,18 @@ describe('Thermostat', function() {
     })
   })
 
-  describe('when Power Save Mode is on', function(){
-    it('has maximum temp of 25 degrees', function(){
-      for (var i = 0; i < 5; i++) {
+  describe('when Power Save Mode is on', function() {
+    it('has maximum temp of 25 degrees', function() {
+      for (var i = 0; i < 6; i++) {
         thermostat.up()
       }
       expect(thermostat.getCurrentTemperature()).toEqual(25)
+    })
+
+    it('resets the temperature to 20', function() {
+      (thermostat.up()) * 5 //increasing temperature 5 times to make it 25
+      thermostat.resetTemp()
+      expect(thermostat.getCurrentTemperature()).toEqual(20)
     })
   })
 
