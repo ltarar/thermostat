@@ -8,7 +8,7 @@ describe('Thermostat', function() {
     thermostat = new Thermostat();
   });
 
-  describe('starts at 20 degrees', function() {
+  describe('starts at 20 degrees in PSM', function() {
     it('20 degrees', function() {
       expect(thermostat.getCurrentTemperature()).toEqual(20)
     })
@@ -45,6 +45,14 @@ describe('Thermostat', function() {
       thermostat.switchPowerSaveModeOn()
       expect(thermostat.isPowerSaveModeOn()).toBe(true)
     })
+
+    it('has a maximum temp of 32 degrees', function() {
+      thermostat.switchPowerSaveModeOff()
+      for (var i = 0; i < 13; i++) {
+        thermostat.up()
+      }
+      expect(thermostat.getCurrentTemperature()).toEqual(32)
+    })
   })
 
   describe('when Power Save Mode is on', function(){
@@ -55,5 +63,6 @@ describe('Thermostat', function() {
       expect(thermostat.getCurrentTemperature()).toEqual(25)
     })
   })
+
 
 })
